@@ -124,7 +124,7 @@
   }
 
   .book-btn {
-    @apply mt-3 min-h-14 w-full bg-dark-600 font-bebas-neue text-base text-primary hover:bg-dark-800 !important;
+    @apply mt-3 min-h-14 w-full bg-dark-600 font-bebas-neue text-base text-primary hover:bg-dark-800 rounded-md;
   }
 
   /* Borrowed Book */
