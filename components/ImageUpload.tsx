@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import { IKImage, ImageKitProvider, IKUpload} from "imagekitio-next";
 import config from '@/lib/config';
 import Image from 'next/image';
-import { toast } from 'sonner';
+import { showToast } from './ui/sonner';
 
 
 
@@ -35,19 +35,14 @@ const ImageUpload = ({onFileChange}:{onFileChange:(filePath:string)=> void}) => 
   const onError = (error:any) =>{
     console.log(error);
 
-    toast("Image Upload Failed...", {
-      description: `Your image could not be uploaded successfully!`
-    }
-  )
+    showToast("Upload Failed", "Please try again.", "destructive");
   }
   const onSuccess = (res:any) =>{
     setFile(res);
     onFileChange(res.filePath);
 
-    toast("Image Uploaded Successfully...", {
-        description: `${res.filePath} uploaded successfully!`,
-      }
-    )
+    showToast("Image Uploaded Successfully...", `${res.filePath} uploaded successfully!`, "success");
+
   }
 
 

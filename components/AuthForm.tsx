@@ -2,7 +2,7 @@
 import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { DefaultValues, FieldValues, Path, SubmitHandler, useForm, UseFormReturn } from "react-hook-form"
-import { z, ZodType } from 'zod'
+import { ZodType } from 'zod'
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import { FIELD_NAMES, FIELD_TYPES } from '@/constants'
 import ImageUpload from './ImageUpload'
+import { useRouter } from 'next/navigation'
+import { showToast } from './ui/sonner'
 
 interface Props<T extends FieldValues> {
     schema: ZodType<T>;
@@ -32,6 +34,7 @@ const AuthForm = <T extends FieldValues>({
     onSubmit
 }: Props<T>) => {
 
+    const router = useRouter()
     const isSignIn = type === 'Sign-In';
 
     // Form.
@@ -41,7 +44,18 @@ const AuthForm = <T extends FieldValues>({
     });
 
     // Submit handler.
-    const handleSubmit: SubmitHandler<T> = async (data) => { };
+    const handleSubmit: SubmitHandler<T> = async (data) => {
+        const result = await onSubmit(data);
+
+        if(result.success){
+            showToast("Success", isSignIn ? "You have successfully signed in." : "You have successfully signed up.","success")
+
+            router.push("/");
+        }else{
+            showToast(`Error ${isSignIn ? "signing in" : "signing up"}`, result.error ?? "An error occurred.","destructive")
+        };
+    
+    }
 
 
 
