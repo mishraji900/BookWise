@@ -119,7 +119,6 @@ export const navigationLinks = [
       coverUrl:
         "https://m.media-amazon.com/images/I/61HAE8zahLL._AC_UF1000,1000_QL80_.jpg",
       videoUrl: "/sample-video.mp4?updatedAt=1722593504152",
-      isLoanedBook: true,
       summary:
         "A magical tale of Santiago, an Andalusian shepherd boy, who embarks on a journey to find a worldly treasure.",
     },
