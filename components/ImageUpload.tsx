@@ -9,7 +9,14 @@ import { showToast } from './ui/sonner';
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
+    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`,
+      {method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors", // Ensure CORS is handled properly
+      credentials: "include", // Include credentials if required
+    });
 
     if(!response.ok){
       const errorText = await response.text();
